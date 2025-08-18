@@ -1,0 +1,12 @@
+/ai-reputation-tracker
+├── backend/
+│   ├── app.py
+│   ├── models.py
+│   ├── data_collector.py
+│   └── sentiment_analyzer.py
+├── frontend/
+│   ├── App.js
+│   └── ReputationGraph.js
+├── database/
+│   └── schema.sql
+└── README.md
