@@ -109,3 +109,62 @@ The backend includes two automation options:
 ## License
 
 [Add your license information here]
+
+## GitHub Pages Deployment
+
+### 📊 Live Interactive Dashboard
+
+This repository includes a **beautiful, interactive HTML dashboard** deployed via GitHub Pages that visualizes the Musk vs Trump reputation comparison in real-time.
+
+**🔗 View Live Dashboard:** `https://[your-username].github.io/musk_vs_trump-ed725`
+
+### Features of the GitHub Pages Dashboard
+
+- **🎯 Real-time Reputation Scores**: Live comparison between Musk and Trump with trend indicators
+- **📊 Interactive Charts**: 7/14/30-day trend analysis with beautiful visualizations
+- **⏲️ Reputation Barometer**: Visual gauge showing current reputation leader
+- **🧠 AI Sentiment Analysis**: Breakdown of positive/neutral/negative sentiment
+- **📈 Key Metrics**: Statistics on posts analyzed, engagement, and media mentions
+- **📱 Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- **🔄 Live Updates**: Simulated real-time data updates every 10 seconds
+- **💾 Data Export**: Download reputation data as CSV files
+- **🎨 Beautiful UI**: Modern gradient design with smooth animations
+
+### Quick Deployment
+
+1. **Automatic Setup** (Recommended):
+   - Go to your repository Settings → Pages
+   - Set source to "Deploy from a branch"
+   - Select branch: `main` and folder: `/docs`
+   - Click Save - GitHub Pages will automatically build and deploy
+
+2. **Manual Verification**:
+   - Visit: `https://[your-username].github.io/[repository-name]`
+   - The dashboard should load with interactive charts and real-time data
+
+### Technical Stack
+
+- **Pure HTML/CSS/JavaScript** - No build process required
+- **Chart.js** - Interactive charts and visualizations
+- **Font Awesome** - Beautiful icons (with emoji fallbacks)
+- **Responsive Grid Layout** - Mobile-first design
+- **Mock Data API** - Simulated real-time reputation tracking
+
+### Files Structure
+
+```
+docs/
+├── index.html      # Main dashboard page
+├── app.js          # Interactive functionality and mock data
+├── README.md       # Deployment documentation
+└── _config.yml     # GitHub Pages configuration
+```
+
+### Future Enhancements
+
+The dashboard is currently in **demo mode** with simulated data. Future versions will:
+
+- Connect to the Flask backend APIs (`/backend/app.py`)
+- Integrate with real Twitter/X sentiment analysis
+- Add historical data persistence
+- Include user authentication and personalized views

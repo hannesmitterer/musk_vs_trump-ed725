@@ -1,0 +1,30 @@
+# GitHub Pages Configuration
+# This file enables GitHub Pages deployment from the docs/ folder
+
+# Site settings
+title: Musk vs Trump - AI Reputation Tracker
+description: Real-time AI-powered reputation tracking and sentiment analysis for public figures
+url: https://hannesmitterer.github.io/musk_vs_trump-ed725
+
+# GitHub Pages settings
+source:
+  branch: main
+  path: /docs
+
+# Jekyll settings (optional)
+plugins:
+  - jekyll-relative-links
+  
+# Markdown processing
+markdown: kramdown
+highlighter: rouge
+
+# Enable relative links
+relative_links:
+  enabled: true
+  collections: false
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - LICENSE
