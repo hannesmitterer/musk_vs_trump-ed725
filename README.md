@@ -5,20 +5,23 @@ This project tracks and analyzes the reputation of public figures through AI-pow
 ## Project Structure
 
 ```
-/ai-reputation-tracker
+/musk_vs_trump-ed725
 ├── backend/
-│   ├── app.py                 # Main Flask/Django application
-│   ├── models.py              # Database models
-│   ├── data_collector.py      # Data collection logic
-│   ├── sentiment_analyzer.py  # AI sentiment analysis
-│   ├── db_manager.py          # Database management utilities
-│   ├── requirements.txt       # Python dependencies
-│   └── start_backend.sh       # Backend automation script
-├── frontend/
-│   ├── App.js
-│   └── ReputationGraph.js
-├── database/
-│   └── schema.sql
+│   ├── app.py                    # Main Flask application
+│   ├── db_manager.py             # Database management utilities
+│   ├── requirements.txt          # Python dependencies
+│   ├── start_backend.sh          # Backend automation script
+│   └── Makefile                  # Build automation
+├── src/
+│   ├── App.jsx                   # Main React component
+│   ├── main.jsx                  # React entry point
+│   └── components/
+│       └── MobileDeployButton.jsx
+├── .github/workflows/
+│   └── deploy.yml                # GitHub Pages deployment
+├── package.json                  # Node.js dependencies and scripts
+├── vite.config.js                # Vite build configuration
+├── index.html                    # HTML entry point
 └── README.md
 ```
 
@@ -72,8 +75,13 @@ If you prefer to set up the backend manually:
 
 ## Prerequisites
 
+**Backend:**
 - Python 3.x
 - pip (Python package manager)
+
+**Frontend:**
+- Node.js (version 18 or higher)
+- npm (comes with Node.js)
 
 ## Development
 
@@ -98,6 +106,63 @@ The backend includes two automation options:
 
 1. Add your package to `backend/requirements.txt`
 2. Run `./start_backend.sh` to automatically install new dependencies
+
+### Frontend Development & Deployment
+
+The frontend is a React application that automatically deploys to GitHub Pages.
+
+#### Live Site
+
+🌐 **Live Frontend**: https://hannesmitterer.github.io/musk_vs_trump-ed725/
+
+#### Local Development
+
+1. **Install Node.js dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173`
+
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+4. **Preview production build:**
+   ```bash
+   npm run preview
+   ```
+
+#### Automated Deployment
+
+The frontend automatically deploys to GitHub Pages when changes are pushed to the `main` branch:
+
+- **GitHub Actions Workflow**: `.github/workflows/deploy.yml`
+- **Build Tool**: Vite (modern React build system)
+- **Deploy Target**: `gh-pages` branch
+- **Live URL**: https://hannesmitterer.github.io/musk_vs_trump-ed725/
+
+The deployment process:
+1. 🔄 Triggers on push to `main` branch
+2. 🏗️ Installs Node.js dependencies
+3. 🚀 Builds the React application
+4. 📦 Uploads build artifacts to GitHub Pages
+5. 🌐 Site is automatically available at the GitHub Pages URL
+
+#### Frontend Structure
+
+```
+src/
+├── App.jsx                          # Main application component
+├── main.jsx                         # React entry point
+└── components/
+    └── MobileDeployButton.jsx       # Mobile deployment component
+```
 
 ## Troubleshooting
 
