@@ -1,0 +1,61 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-validate:
+    name: Lint and Validate
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          # Backend dependencies
+          cd backend
+          pip install -r requirements.txt
+          cd ..
+          
+          # Frontend dependencies
+          npm ci
+
+      - name: Validate backend
+        run: |
+          cd backend
+          python -c "import db_manager; db_manager.create_tables(); print('Backend validation passed')"
+          
+          # Test automation scripts
+          chmod +x start_backend.sh
+          bash -n start_backend.sh
+          make help > /dev/null
+
+      - name: Validate frontend
+        run: |
+          npm run build
+          echo "Frontend build validation passed"
+
+      - name: Check project structure
+        run: |
+          echo "Checking project structure..."
+          test -f backend/app.py || (echo "❌ Missing backend/app.py" && exit 1)
+          test -f backend/db_manager.py || (echo "❌ Missing backend/db_manager.py" && exit 1)
+          test -f src/App.jsx || (echo "❌ Missing src/App.jsx" && exit 1)
+          test -f package.json || (echo "❌ Missing package.json" && exit 1)
+          test -f .github/workflows/deploy.yml || (echo "❌ Missing deploy workflow" && exit 1)
+          echo "✅ Project structure validation passed"

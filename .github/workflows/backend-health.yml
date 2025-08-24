@@ -1,0 +1,56 @@
+name: Backend Health Check
+
+on:
+  schedule:
+    # Run health check daily at 9 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    # Allow manual trigger
+
+jobs:
+  backend-health:
+    name: Backend Health Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Test backend automation scripts
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          
+          echo "Testing shell script automation..."
+          chmod +x start_backend.sh
+          bash -n start_backend.sh
+          
+          echo "Testing Makefile automation..."
+          make help
+          make install-deps
+          make init-db
+          
+          echo "Testing database manager..."
+          python -c "import db_manager; db_manager.create_tables()"
+          
+          echo "✅ All backend automation tests passed!"
+
+      - name: Validate backend structure
+        run: |
+          cd backend
+          echo "Checking backend file structure..."
+          
+          # Check required files exist
+          test -f app.py || (echo "❌ Missing app.py" && exit 1)
+          test -f db_manager.py || (echo "❌ Missing db_manager.py" && exit 1)
+          test -f requirements.txt || (echo "❌ Missing requirements.txt" && exit 1)
+          test -f start_backend.sh || (echo "❌ Missing start_backend.sh" && exit 1)
+          test -f Makefile || (echo "❌ Missing Makefile" && exit 1)
+          
+          echo "✅ Backend structure validation passed!"
