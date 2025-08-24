@@ -1,5 +1,5 @@
 import React from 'react';
-import MobileDeployButton from './MobileDeployButton';
+import MobileDeployButton from './components/MobileDeployButton';
 
 function App() {
   return (
